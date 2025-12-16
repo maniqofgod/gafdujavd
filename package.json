@@ -1,0 +1,103 @@
+{
+  "name": "autocliper",
+  "version": "1.0.0",
+  "description": "AI-powered YouTube video clipper and downloader",
+  "main": "src/main/main.js",
+  "homepage": "./",
+  "scripts": {
+    "start": "npm run build-react && npm run electron",
+    "dev": "npm run build-react && npm run electron",
+    "dev-react": "react-scripts start",
+    "build-react": "react-scripts build",
+    "build-electron": "electron-builder",
+    "build": "npm run build-react && npm run build-electron",
+    "electron": "cross-env NODE_ENV=development electron .",
+    "dist": "npm run build && npm run build-electron",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "build": {
+    "extends": null,
+    "appId": "com.autoclipper.ai",
+    "productName": "Auto Clipper AI",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "build/**/*",
+      "src/main/**/*",
+      "src/services/**/*",
+      "node_modules/**/*"
+    ],
+    "extraFiles": [
+      {
+        "from": "backend/dist/autocaption",
+        "to": "resources/autocaption"
+      },
+      {
+        "from": "backend/fonts",
+        "to": "resources/fonts"
+      }
+    ],
+    "asarUnpack": [
+      "node_modules/yt-dlp-exec/**/*",
+      "node_modules/ffmpeg-static/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    }
+  },
+  "keywords": [],
+  "author": "devcURL",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "apify-client": "^2.20.0",
+    "bcrypt": "^6.0.0",
+    "ffmpeg-static": "^5.3.0",
+    "fluent-ffmpeg": "^2.1.3",
+    "googleapis": "^167.0.0",
+    "jsonwebtoken": "^9.0.3",
+    "lowdb": "^7.0.1",
+    "multer": "^2.0.2",
+    "pify": "^6.1.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "socket.io-client": "^4.8.1",
+    "sqlite3": "^5.1.7",
+    "uuid": "^13.0.0",
+    "youtube-transcript": "^1.2.1",
+    "yt-dlp-exec": "^1.0.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.22",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^39.2.4",
+    "electron-builder": "^26.0.12",
+    "postcss": "^8.5.6",
+    "react-scripts": "^5.0.1",
+    "tailwindcss": "^3.4.18",
+    "wait-on": "^9.0.3"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
